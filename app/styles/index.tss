@@ -22,7 +22,7 @@
 },
 ".divider": {
   height: "1dp",
-  backgroundColor: "rgb(180, 180, 180)",
+  backgroundColor: "#BBBBBB",
   width: Ti.UI.FILL
 },
 ".numBikes": {

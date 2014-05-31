@@ -24,7 +24,8 @@ function Controller() {
         height: "170dp",
         id: "mapview",
         ns: "Alloy.Globals.Map",
-        animate: "true"
+        animate: "true",
+        userLocation: "true"
     });
     $.__views.index.add($.__views.mapview);
     $.__views.stations = Ti.UI.createView({
@@ -84,7 +85,7 @@ function Controller() {
     $.__views.firstStation.add($.__views.__alloyId2);
     $.__views.__alloyId3 = Ti.UI.createView({
         height: "1dp",
-        backgroundColor: "rgb(180, 180, 180)",
+        backgroundColor: "#BBBBBB",
         width: Ti.UI.FILL,
         id: "__alloyId3"
     });
@@ -139,7 +140,7 @@ function Controller() {
     $.__views.__alloyId4.add($.__views.__alloyId7);
     $.__views.__alloyId8 = Ti.UI.createView({
         height: "1dp",
-        backgroundColor: "rgb(180, 180, 180)",
+        backgroundColor: "#BBBBBB",
         width: Ti.UI.FILL,
         id: "__alloyId8"
     });
@@ -194,7 +195,7 @@ function Controller() {
     $.__views.__alloyId9.add($.__views.__alloyId12);
     $.__views.__alloyId13 = Ti.UI.createView({
         height: "1dp",
-        backgroundColor: "rgb(180, 180, 180)",
+        backgroundColor: "#BBBBBB",
         width: Ti.UI.FILL,
         id: "__alloyId13"
     });
@@ -249,7 +250,7 @@ function Controller() {
     $.__views.__alloyId14.add($.__views.__alloyId17);
     $.__views.__alloyId18 = Ti.UI.createView({
         height: "1dp",
-        backgroundColor: "rgb(180, 180, 180)",
+        backgroundColor: "#BBBBBB",
         width: Ti.UI.FILL,
         id: "__alloyId18"
     });

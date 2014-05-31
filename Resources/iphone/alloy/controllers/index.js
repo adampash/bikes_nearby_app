@@ -24,7 +24,8 @@ function Controller() {
         height: "170dp",
         id: "mapview",
         ns: "Alloy.Globals.Map",
-        animate: "true"
+        animate: "true",
+        mapType: "Alloy.Globals.Map.NORMAL_TYPE"
     });
     $.__views.index.add($.__views.mapview);
     $.__views.stations = Ti.UI.createView({
