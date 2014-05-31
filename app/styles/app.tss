@@ -5,4 +5,7 @@
     fontStyle: 'normal',
     fontWeight: 'normal'
   }
+},
+"Window": {
+  navBarHidden: true
 }

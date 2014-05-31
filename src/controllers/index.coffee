@@ -42,7 +42,7 @@ dropMarker = (station) ->
 
 activateStation = (station, index) ->
   dropMarker(station)
-  zoomToFit($.mapview, [@location.coords, station])
+  zoomToFit($.mapview, [myLocation.coords, station])
   # showInfoWindow(station)
   # drawPath(index)
   # $('.station').removeClass('active')
@@ -52,9 +52,12 @@ activateStation = (station, index) ->
 locate_bikes = require('locate_bikes').bikes
 
 nearestStations = []
+myLocation = null
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST
 Ti.Geolocation.purpose = "Find the bikes nearest to you"
 Ti.Geolocation.getCurrentPosition (@location) ->
+  myLocation = @location
+  Ti.API.info JSON.stringify @location
   locate_bikes.fetchBikesNear @location, (closestStations) =>
     nearestStations = closestStations
     for station, index in $.stations.children by 2
