@@ -2,63 +2,49 @@
   <Window class="container">
     <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
     <View id="stations">
-      <View class="station">
+      <View class="station" stationId="0" id="firstStation" onClick="focusStation">
         <Label class="numBikes">
-          5
         </Label>
         <Label class="stationName">
-          DeKalb Ave &amp; S Portland Ave
+          Loading...
         </Label>
         <Label class="eta">
-          1 min
         </Label>
       </View>
       <View class="divider"></View>
-      <View class="station">
+      <View class="station" stationId="1" onClick="focusStation">
         <Label class="numBikes">
-          20
         </Label>
         <Label class="stationName">
-          Lafayette Ave &amp; Fort Greene Pl
         </Label>
         <Label class="eta">
-          5 min
         </Label>
       </View>
       <View class="divider"></View>
-      <View class="station">
+      <View class="station" stationId="2" onClick="focusStation">
         <Label class="numBikes">
-          5
         </Label>
         <Label class="stationName">
-          DeKalb Ave &amp; S Portland Ave
         </Label>
         <Label class="eta">
-          1 min
         </Label>
       </View>
       <View class="divider"></View>
-      <View class="station">
+      <View class="station" stationId="3" onClick="focusStation">
         <Label class="numBikes">
-          20
         </Label>
         <Label class="stationName">
-          Lafayette Ave &amp; Fort Greene Pl
         </Label>
         <Label class="eta">
-          5 min
         </Label>
       </View>
       <View class="divider"></View>
-      <View class="station">
+      <View class="station" stationId="4" onClick="focusStation">
         <Label class="numBikes">
-          5
         </Label>
         <Label class="stationName">
-          DeKalb Ave &amp; S Portland Ave
         </Label>
         <Label class="eta">
-          1 min
         </Label>
       </View>
     </View>

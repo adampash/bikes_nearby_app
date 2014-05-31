@@ -1,8 +1,13 @@
+focusStation = (event) ->
+  for station in $.stations.children
+    station.setOpacity(0.5)
+  this.setOpacity(1)
+  activateStation(nearestStations[this.stationId], this.stationId)
+
 zoomToFit = (map,locations) ->
   total_locations = locations.length
 
   for location in locations
-    Ti.API.info location
     if !minLati? or minLati > location.latitude
       minLati = location.latitude
     if !minLongi? or minLongi > location.longitude
@@ -25,6 +30,7 @@ zoomToFit = (map,locations) ->
       longitudeDelta:delta * 2
 
 dropMarker = (station) ->
+  $.mapview.removeAllAnnotations()
   station = Alloy.Globals.Map.createAnnotation
     latitude:station.latitude,
     longitude:station.longitude,
@@ -35,7 +41,6 @@ dropMarker = (station) ->
   $.mapview.addAnnotation(station)
 
 activateStation = (station, index) ->
-  console.log 'activate station ' + index
   dropMarker(station)
   zoomToFit($.mapview, [@location.coords, station])
   # showInfoWindow(station)
@@ -46,12 +51,17 @@ activateStation = (station, index) ->
 
 locate_bikes = require('locate_bikes').bikes
 
+nearestStations = []
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST
 Ti.Geolocation.purpose = "Find the bikes nearest to you"
 Ti.Geolocation.getCurrentPosition (@location) ->
   locate_bikes.fetchBikesNear @location, (closestStations) =>
-    Ti.API.info 'Closest Stations! ', closestStations
-    activateStation(closestStations[0], 0)
+    nearestStations = closestStations
+    for station, index in $.stations.children by 2
+      thisStation = nearestStations[index/2]
+      station.children[0].text = thisStation.availableBikes
+      station.children[1].text = thisStation.stationName
+    $.firstStation.fireEvent 'click'
 
 $.index.open()
 

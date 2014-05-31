@@ -1,11 +1,21 @@
-var activateStation, dropMarker, locate_bikes, zoomToFit;
+var activateStation, dropMarker, focusStation, locate_bikes, nearestStations, zoomToFit;
+
+focusStation = function(event) {
+  var station, _i, _len, _ref;
+  _ref = $.stations.children;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    station = _ref[_i];
+    station.setOpacity(0.5);
+  }
+  this.setOpacity(1);
+  return activateStation(nearestStations[this.stationId], this.stationId);
+};
 
 zoomToFit = function(map, locations) {
   var delta, lgDiff, location, ltDiff, maxLati, maxLongi, minLati, minLongi, total_locations, _i, _len;
   total_locations = locations.length;
   for (_i = 0, _len = locations.length; _i < _len; _i++) {
     location = locations[_i];
-    Ti.API.info(location);
     if ((typeof minLati === "undefined" || minLati === null) || minLati > location.latitude) {
       minLati = location.latitude;
     }
@@ -34,6 +44,7 @@ zoomToFit = function(map, locations) {
 };
 
 dropMarker = function(station) {
+  $.mapview.removeAllAnnotations();
   station = Alloy.Globals.Map.createAnnotation({
     latitude: station.latitude,
     longitude: station.longitude,
@@ -46,12 +57,13 @@ dropMarker = function(station) {
 };
 
 activateStation = function(station, index) {
-  console.log('activate station ' + index);
   dropMarker(station);
   return zoomToFit($.mapview, [this.location.coords, station]);
 };
 
 locate_bikes = require('locate_bikes').bikes;
+
+nearestStations = [];
 
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 
@@ -61,8 +73,16 @@ Ti.Geolocation.getCurrentPosition(function(location) {
   this.location = location;
   return locate_bikes.fetchBikesNear(this.location, (function(_this) {
     return function(closestStations) {
-      Ti.API.info('Closest Stations! ', closestStations);
-      return activateStation(closestStations[0], 0);
+      var index, station, thisStation, _i, _len, _ref;
+      nearestStations = closestStations;
+      _ref = $.stations.children;
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = _i += 2) {
+        station = _ref[index];
+        thisStation = nearestStations[index / 2];
+        station.children[0].text = thisStation.availableBikes;
+        station.children[1].text = thisStation.stationName;
+      }
+      return $.firstStation.fireEvent('click');
     };
   })(this));
 });
