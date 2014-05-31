@@ -1,0 +1,8 @@
+".container": {
+  font: {
+    fontFamily:'Helvetica',
+    fontSize: '14dp',
+    fontStyle: 'normal',
+    fontWeight: 'normal'
+  }
+}

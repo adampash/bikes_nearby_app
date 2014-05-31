@@ -1,6 +1,29 @@
 <Alloy>
   <Window class="container">
     <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
-    <Label id="label" onClick="doClick">Hello, World</Label>
+    <View id="stations">
+      <View class="station">
+        <Label class="numBikes">
+          5
+        </Label>
+        <Label class="stationName">
+          DeKalb Ave &amp; S Portland Ave
+        </Label>
+        <Label class="eta">
+          1 min
+        </Label>
+      </View>
+      <View class="station">
+        <Label class="numBikes">
+          20
+        </Label>
+        <Label class="stationName">
+          Lafayette Ave &amp; Fort Greene Pl
+        </Label>
+        <Label class="eta">
+          5 min
+        </Label>
+      </View>
+    </View>
   </Window>
 </Alloy>
