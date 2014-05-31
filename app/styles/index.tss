@@ -20,6 +20,11 @@
   layout: 'composite',
   height: "60dp",
 },
+".divider": {
+  height: "1dp",
+  backgroundColor: "rgb(180, 180, 180)",
+  width: Ti.UI.FILL
+},
 ".numBikes": {
   color: "#0000FF",
   top: "15dp",

@@ -79,13 +79,20 @@ function Controller() {
     });
     $.__views.__alloyId0.add($.__views.__alloyId3);
     $.__views.__alloyId4 = Ti.UI.createView({
+        height: "1dp",
+        backgroundColor: "rgb(180, 180, 180)",
         width: Ti.UI.FILL,
-        layout: "composite",
-        height: "60dp",
         id: "__alloyId4"
     });
     $.__views.stations.add($.__views.__alloyId4);
-    $.__views.__alloyId5 = Ti.UI.createLabel({
+    $.__views.__alloyId5 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        layout: "composite",
+        height: "60dp",
+        id: "__alloyId5"
+    });
+    $.__views.stations.add($.__views.__alloyId5);
+    $.__views.__alloyId6 = Ti.UI.createLabel({
         width: "45dp",
         height: Ti.UI.SIZE,
         color: "#0000FF",
@@ -96,10 +103,10 @@ function Controller() {
         },
         textAlign: "center",
         text: "20",
-        id: "__alloyId5"
+        id: "__alloyId6"
     });
-    $.__views.__alloyId4.add($.__views.__alloyId5);
-    $.__views.__alloyId6 = Ti.UI.createLabel({
+    $.__views.__alloyId5.add($.__views.__alloyId6);
+    $.__views.__alloyId7 = Ti.UI.createLabel({
         width: "200dp",
         height: Ti.UI.SIZE,
         color: "#000",
@@ -108,10 +115,10 @@ function Controller() {
             fontSize: "14dp"
         },
         text: "Lafayette Ave & Fort Greene Pl",
-        id: "__alloyId6"
+        id: "__alloyId7"
     });
-    $.__views.__alloyId4.add($.__views.__alloyId6);
-    $.__views.__alloyId7 = Ti.UI.createLabel({
+    $.__views.__alloyId5.add($.__views.__alloyId7);
+    $.__views.__alloyId8 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#0000FF",
@@ -121,9 +128,168 @@ function Controller() {
             fontSize: "12dp"
         },
         text: "5 min",
-        id: "__alloyId7"
+        id: "__alloyId8"
     });
-    $.__views.__alloyId4.add($.__views.__alloyId7);
+    $.__views.__alloyId5.add($.__views.__alloyId8);
+    $.__views.__alloyId9 = Ti.UI.createView({
+        height: "1dp",
+        backgroundColor: "rgb(180, 180, 180)",
+        width: Ti.UI.FILL,
+        id: "__alloyId9"
+    });
+    $.__views.stations.add($.__views.__alloyId9);
+    $.__views.__alloyId10 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        layout: "composite",
+        height: "60dp",
+        id: "__alloyId10"
+    });
+    $.__views.stations.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createLabel({
+        width: "45dp",
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "15dp",
+        left: "10dp",
+        font: {
+            fontSize: "30dp"
+        },
+        textAlign: "center",
+        text: "5",
+        id: "__alloyId11"
+    });
+    $.__views.__alloyId10.add($.__views.__alloyId11);
+    $.__views.__alloyId12 = Ti.UI.createLabel({
+        width: "200dp",
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: "25dp",
+        font: {
+            fontSize: "14dp"
+        },
+        text: "DeKalb Ave & S Portland Ave",
+        id: "__alloyId12"
+    });
+    $.__views.__alloyId10.add($.__views.__alloyId12);
+    $.__views.__alloyId13 = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "25dp",
+        right: "15dp",
+        font: {
+            fontSize: "12dp"
+        },
+        text: "1 min",
+        id: "__alloyId13"
+    });
+    $.__views.__alloyId10.add($.__views.__alloyId13);
+    $.__views.__alloyId14 = Ti.UI.createView({
+        height: "1dp",
+        backgroundColor: "rgb(180, 180, 180)",
+        width: Ti.UI.FILL,
+        id: "__alloyId14"
+    });
+    $.__views.stations.add($.__views.__alloyId14);
+    $.__views.__alloyId15 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        layout: "composite",
+        height: "60dp",
+        id: "__alloyId15"
+    });
+    $.__views.stations.add($.__views.__alloyId15);
+    $.__views.__alloyId16 = Ti.UI.createLabel({
+        width: "45dp",
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "15dp",
+        left: "10dp",
+        font: {
+            fontSize: "30dp"
+        },
+        textAlign: "center",
+        text: "20",
+        id: "__alloyId16"
+    });
+    $.__views.__alloyId15.add($.__views.__alloyId16);
+    $.__views.__alloyId17 = Ti.UI.createLabel({
+        width: "200dp",
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: "25dp",
+        font: {
+            fontSize: "14dp"
+        },
+        text: "Lafayette Ave & Fort Greene Pl",
+        id: "__alloyId17"
+    });
+    $.__views.__alloyId15.add($.__views.__alloyId17);
+    $.__views.__alloyId18 = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "25dp",
+        right: "15dp",
+        font: {
+            fontSize: "12dp"
+        },
+        text: "5 min",
+        id: "__alloyId18"
+    });
+    $.__views.__alloyId15.add($.__views.__alloyId18);
+    $.__views.__alloyId19 = Ti.UI.createView({
+        height: "1dp",
+        backgroundColor: "rgb(180, 180, 180)",
+        width: Ti.UI.FILL,
+        id: "__alloyId19"
+    });
+    $.__views.stations.add($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        layout: "composite",
+        height: "60dp",
+        id: "__alloyId20"
+    });
+    $.__views.stations.add($.__views.__alloyId20);
+    $.__views.__alloyId21 = Ti.UI.createLabel({
+        width: "45dp",
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "15dp",
+        left: "10dp",
+        font: {
+            fontSize: "30dp"
+        },
+        textAlign: "center",
+        text: "5",
+        id: "__alloyId21"
+    });
+    $.__views.__alloyId20.add($.__views.__alloyId21);
+    $.__views.__alloyId22 = Ti.UI.createLabel({
+        width: "200dp",
+        height: Ti.UI.SIZE,
+        color: "#000",
+        top: "25dp",
+        font: {
+            fontSize: "14dp"
+        },
+        text: "DeKalb Ave & S Portland Ave",
+        id: "__alloyId22"
+    });
+    $.__views.__alloyId20.add($.__views.__alloyId22);
+    $.__views.__alloyId23 = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        color: "#0000FF",
+        top: "25dp",
+        right: "15dp",
+        font: {
+            fontSize: "12dp"
+        },
+        text: "1 min",
+        id: "__alloyId23"
+    });
+    $.__views.__alloyId20.add($.__views.__alloyId23);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var activateStation, dropMarker, locate_bikes, zoomToFit;
