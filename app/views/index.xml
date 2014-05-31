@@ -1,0 +1,6 @@
+<Alloy>
+  <Window class="container">
+    <View id="mapview" ns="Alloy.Globals.Map" animate="true" />
+    <Label id="label" onClick="doClick">Hello, World</Label>
+  </Window>
+</Alloy>

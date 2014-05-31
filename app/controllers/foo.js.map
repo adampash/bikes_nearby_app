@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "foo.js",
+  "sourceRoot": "../../src/controllers/",
+  "sources": [
+    "foo.coffee"
+  ],
+  "names": [],
+  "mappings": "AA2GuD"
+}
