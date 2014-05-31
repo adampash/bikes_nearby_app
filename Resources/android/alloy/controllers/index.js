@@ -350,8 +350,6 @@ function Controller() {
     };
     activateStation = function(station) {
         dropMarker(station);
-        Ti.API.info("myLocation");
-        Ti.API.info(myLocation);
         return zoomToFit($.mapview, [ myLocation.coords, station ]);
     };
     locate_bikes = require("locate_bikes").bikes;

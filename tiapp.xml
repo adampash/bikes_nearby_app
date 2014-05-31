@@ -48,41 +48,40 @@
       <!-- Use Wi-Fi or mobile connection for device location -->
       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
       <!-- Allows the API to access Google web-based services -->
-      <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+      <uses-permission 
+        android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
       <!-- Specify OpenGL ES 2.0 as a requirement -->
       <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
-      <!-- Replace <com.domain.appid> with your application ID -->
-        <uses-permission android:name="com.adampash.bikes.permission.MAPS_RECEIVE"/>
-          <permission android:name="com.adampash.bikes" android:protectionLevel="signature"/>
-            <application>
-              <!-- Replace "PASTE YOUR GOOGLE MAPS API KEY HERE" with the Google API key you obtained -->
-              <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBAyH_Sa9bNecMGlQVVlb0wWFxwIuDxTaw"/>
-              <!-- <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBsP-unEXkD9qNllUSjJZu4yXoOqP6JVCQ"/> -->
-            </application>
-          </manifest>
-        </android>
-        <mobileweb>
-          <precache>
-          </precache>
-          <splash>
-            <enabled>true</enabled>
-            <inline-css-images>true</inline-css-images>
-          </splash>
-          <theme>default</theme>
-        </mobileweb>
-        <modules>
-          <module platform="android">ti.map</module>
-          <module platform="iphone">ti.map</module>
-        </modules>
-        <deployment-targets>
-          <target device="android">true</target>
-          <target device="blackberry">false</target>
-          <target device="ipad">true</target>
-          <target device="iphone">true</target>
-          <target device="mobileweb">false</target>
-          <target device="tizen">false</target>
-        </deployment-targets>
-        <sdk-version>3.2.2.GA</sdk-version>
-        <plugins><plugin version="1.0">ti.alloy</plugin>
-        </plugins>
-      </ti:app>
+      <uses-permission android:name="com.adampash.bikes.permission.MAPS_RECEIVE"/>
+      <permission android:name="com.adampash.bikes.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+      <application>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBl5q1WRI56GnHl_0PB9Rluj98-vJMkkI0"/>
+      </application>
+    </manifest>
+  </android>
+  <mobileweb>
+    <precache>
+    </precache>
+    <splash>
+      <enabled>true</enabled>
+      <inline-css-images>true</inline-css-images>
+    </splash>
+    <theme>default</theme>
+  </mobileweb>
+  <modules>
+    <module platform="android">ti.map</module>
+    <module platform="iphone">ti.map</module>
+  </modules>
+  <deployment-targets>
+    <target device="android">true</target>
+    <target device="blackberry">false</target>
+    <target device="ipad">true</target>
+    <target device="iphone">true</target>
+    <target device="mobileweb">false</target>
+    <target device="tizen">false</target>
+  </deployment-targets>
+  <sdk-version>3.2.2.GA</sdk-version>
+  <plugins><plugin version="1.0">ti.alloy</plugin>
+  </plugins>
+</ti:app>

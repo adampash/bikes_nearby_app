@@ -8,6 +8,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
+        navBarHidden: true,
         font: {
             fontFamily: "Helvetica",
             fontSize: "14dp",
@@ -303,7 +304,7 @@ function Controller() {
     $.__views.__alloyId19.add($.__views.__alloyId22);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var activateStation, dropMarker, focusStation, locate_bikes, nearestStations, zoomToFit;
+    var activateStation, dropMarker, focusStation, locate_bikes, myLocation, nearestStations, zoomToFit;
     focusStation = function() {
         var station, _i, _len, _ref;
         _ref = $.stations.children;
@@ -349,14 +350,17 @@ function Controller() {
     };
     activateStation = function(station) {
         dropMarker(station);
-        return zoomToFit($.mapview, [ this.location.coords, station ]);
+        return zoomToFit($.mapview, [ myLocation.coords, station ]);
     };
     locate_bikes = require("locate_bikes").bikes;
     nearestStations = [];
+    myLocation = null;
     Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
     Ti.Geolocation.purpose = "Find the bikes nearest to you";
     Ti.Geolocation.getCurrentPosition(function(location) {
         this.location = location;
+        myLocation = this.location;
+        Ti.API.info(JSON.stringify(this.location));
         return locate_bikes.fetchBikesNear(this.location, function() {
             return function(closestStations) {
                 var index, station, thisStation, _i, _len, _ref;
