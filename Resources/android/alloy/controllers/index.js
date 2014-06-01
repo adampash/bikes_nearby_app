@@ -21,15 +21,16 @@ function Controller() {
     $.__views.index && $.addTopLevelView($.__views.index);
     $.__views.mapview = Alloy.Globals.Map.createView({
         top: 0,
-        height: "170dp",
+        height: "230dp",
         id: "mapview",
         ns: "Alloy.Globals.Map",
         animate: "true",
-        userLocation: "true"
+        userLocation: "true",
+        enableZoomControls: "false"
     });
     $.__views.index.add($.__views.mapview);
     $.__views.stations = Ti.UI.createView({
-        top: "170dp",
+        top: "230dp",
         bottom: 0,
         layout: "vertical",
         id: "stations"
@@ -392,9 +393,6 @@ function Controller() {
     Ti.App.addEventListener("resumed", function() {
         return initialize();
     });
-    setInterval(function() {
-        return initialize();
-    }, 6e4);
     initialize();
     $.index.open();
     __defers["$.__views.firstStation!click!focusStation"] && $.__views.firstStation.addEventListener("click", focusStation);

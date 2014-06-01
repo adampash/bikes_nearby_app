@@ -1,5 +1,6 @@
 ((exports) ->
   distance = require('distance').distance
+  $ = require('_helpers').$
   bikes =
     bikeShares: [
       city: 'New York City'
@@ -69,15 +70,18 @@
       bikeJSON = @bikeShares[0].url
       Ti.API.info bikeJSON
 
-      client = Ti.Network.createHTTPClient
-        onload: (e) =>
-          data = JSON.parse e.source.responseText
+      $.ajax
+        url: bikeJSON
+        dataType: 'json'
+        crossDomain: true
+        success: (data) =>
+          # log data
           bikeStations = data.stationBeanList
           bikeStations.sort (station1, station2) =>
             @simpleDistance(coords, station1) - @simpleDistance(coords, station2)
+            # station2.stationName.length - station1.stationName.length
           closestStations = []
           if distance.getDistance(bikeStations[0], coords) > 48280
-            Ti.API.info 'too far away'
             closestStations = false
           else
             for i in [0..4]
@@ -86,14 +90,35 @@
                   distance.getDistance(station, coords)
               )
               closestStations.push station
-          @callback closestStations, coords if @callback?
-        onerror: (e) =>
-          Ti.API.debug(e.error)
-          alert('error') # TODO display message
-        timeout : 5000  # in milliseconds
+          # log "Nearest station is:", closestStations[0]
 
-      client.open("GET", bikeJSON)
-      client.send()
+          # if you're over 30 miles (48280.3m) from the closest station return false
+          @callback closestStations, coords if @callback?
+      # client = Ti.Network.createHTTPClient
+      #   onload: (e) =>
+      #     data = JSON.parse e.source.responseText
+      #     bikeStations = data.stationBeanList
+      #     bikeStations.sort (station1, station2) =>
+      #       @simpleDistance(coords, station1) - @simpleDistance(coords, station2)
+      #     closestStations = []
+      #     if distance.getDistance(bikeStations[0], coords) > 48280
+      #       Ti.API.info 'too far away'
+      #       closestStations = false
+      #     else
+      #       for i in [0..4]
+      #         station = bikeStations[i]
+      #         station.distanceInMiles = distance.metersToMiles(
+      #             distance.getDistance(station, coords)
+      #         )
+      #         closestStations.push station
+      #     @callback closestStations, coords if @callback?
+      #   onerror: (e) =>
+      #     Ti.API.debug(e.error)
+      #     alert('error') # TODO display message
+      #   timeout : 5000  # in milliseconds
+
+      # client.open("GET", bikeJSON)
+      # client.send()
 
     fetchBikesNear: (position, callback) ->
       # log position

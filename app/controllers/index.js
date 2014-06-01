@@ -106,10 +106,6 @@ Ti.App.addEventListener('resumed', function() {
   return initialize();
 });
 
-setInterval(function() {
-  return initialize();
-}, 1000 * 60);
-
 initialize();
 
 $.index.open();

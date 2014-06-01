@@ -1,6 +1,8 @@
 <Alloy>
   <Window class="container">
-    <View id="mapview" ns="Alloy.Globals.Map" animate="true" userLocation="true" />
+    <View id="mapview" ns="Alloy.Globals.Map"
+      animate="true" userLocation="true"
+      enableZoomControls="false" />
     <View id="stations">
       <View class="station" stationId="0" id="firstStation" onClick="focusStation">
         <Label class="numBikes">

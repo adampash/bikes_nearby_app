@@ -78,9 +78,9 @@ initialize = ->
 Ti.App.addEventListener 'resumed', ->
   initialize()
 
-setInterval ->
-  initialize()
-, 1000 * 60
+# setInterval ->
+#   initialize()
+# , 1000 * 60
 
 initialize()
 $.index.open()

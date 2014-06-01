@@ -1,6 +1,7 @@
 (function(exports) {
-    var bikes, distance;
+    var $, bikes, distance;
     distance = require("distance").distance;
+    $ = require("_helpers").$;
     bikes = {
         bikeShares: [ {
             city: "New York City",
@@ -37,7 +38,7 @@
             return Math.abs(coords.latitude - station.latitude) + Math.abs(coords.longitude - station.longitude);
         },
         findNearestStation: function(coords) {
-            var bikeJSON, client;
+            var bikeJSON;
             this.bikeShares.sort(function(_this) {
                 return function(city1, city2) {
                     return _this.simpleDistance(coords, city1) - _this.simpleDistance(coords, city2);
@@ -45,37 +46,27 @@
             }(this));
             bikeJSON = this.bikeShares[0].url;
             Ti.API.info(bikeJSON);
-            client = Ti.Network.createHTTPClient({
-                onload: function(_this) {
-                    return function(e) {
-                        var bikeStations, closestStations, data, i, station, _i;
-                        data = JSON.parse(e.source.responseText);
+            return $.ajax({
+                url: bikeJSON,
+                dataType: "json",
+                crossDomain: true,
+                success: function(_this) {
+                    return function(data) {
+                        var bikeStations, closestStations, i, station, _i;
                         bikeStations = data.stationBeanList;
                         bikeStations.sort(function(station1, station2) {
                             return _this.simpleDistance(coords, station1) - _this.simpleDistance(coords, station2);
                         });
                         closestStations = [];
-                        if (distance.getDistance(bikeStations[0], coords) > 48280) {
-                            Ti.API.info("too far away");
-                            closestStations = false;
-                        } else for (i = _i = 0; 4 >= _i; i = ++_i) {
+                        if (distance.getDistance(bikeStations[0], coords) > 48280) closestStations = false; else for (i = _i = 0; 4 >= _i; i = ++_i) {
                             station = bikeStations[i];
                             station.distanceInMiles = distance.metersToMiles(distance.getDistance(station, coords));
                             closestStations.push(station);
                         }
                         if (null != _this.callback) return _this.callback(closestStations, coords);
                     };
-                }(this),
-                onerror: function() {
-                    return function(e) {
-                        Ti.API.debug(e.error);
-                        return alert("error");
-                    };
-                }(this),
-                timeout: 5e3
+                }(this)
             });
-            client.open("GET", bikeJSON);
-            return client.send();
         },
         fetchBikesNear: function(position, callback) {
             null != callback && (this.callback = callback);
