@@ -1,7 +1,8 @@
 (function(exports) {
-  var $, bikes, distance;
+  var $, bikes, distance, log;
   distance = require('distance').distance;
   $ = require('_helpers').$;
+  log = require('_helpers').log;
   bikes = {
     bikeShares: [
       {
@@ -47,6 +48,7 @@
         };
       })(this));
       bikeJSON = this.bikeShares[0].url;
+      log('OMG', bikeJSON);
       return $.ajax({
         url: bikeJSON,
         dataType: 'json',

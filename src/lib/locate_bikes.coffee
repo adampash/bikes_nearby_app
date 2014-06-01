@@ -1,6 +1,7 @@
 ((exports) ->
   distance = require('distance').distance
   $ = require('_helpers').$
+  log = require('_helpers').log
   bikes =
     bikeShares: [
       city: 'New York City'
@@ -68,6 +69,7 @@
         @simpleDistance(coords, city1) - @simpleDistance(coords, city2)
 
       bikeJSON = @bikeShares[0].url
+      log 'OMG', bikeJSON
 
       $.ajax
         url: bikeJSON

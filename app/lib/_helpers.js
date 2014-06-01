@@ -3,8 +3,14 @@ var $, dev, log;
 dev = true;
 
 log = function(args) {
+  var arg, index, _i, _len, _results;
   if (dev) {
-    return console.log.apply(console, arguments);
+    _results = [];
+    for (index = _i = 0, _len = arguments.length; _i < _len; index = ++_i) {
+      arg = arguments[index];
+      _results.push(Ti.API.info(index + 1 + ':', arg));
+    }
+    return _results;
   }
 };
 

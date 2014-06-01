@@ -1,8 +1,8 @@
 dev = true
 log = (args) ->
   if dev
-    # Ti.API.info.apply console,  arguments
-    console.log.apply console,  arguments
+    for arg, index in arguments
+      Ti.API.info  index + 1 + ':', arg
 
 $ =
   ajax: (options) ->

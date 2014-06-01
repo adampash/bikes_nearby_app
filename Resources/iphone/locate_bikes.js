@@ -1,7 +1,8 @@
 (function(exports) {
-    var $, bikes, distance;
+    var $, bikes, distance, log;
     distance = require("distance").distance;
     $ = require("_helpers").$;
+    log = require("_helpers").log;
     bikes = {
         bikeShares: [ {
             city: "New York City",
@@ -45,7 +46,7 @@
                 };
             }(this));
             bikeJSON = this.bikeShares[0].url;
-            Ti.API.info(bikeJSON);
+            log("OMG", bikeJSON);
             return $.ajax({
                 url: bikeJSON,
                 dataType: "json",

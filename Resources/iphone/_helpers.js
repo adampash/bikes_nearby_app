@@ -3,7 +3,15 @@ var $, dev, log;
 dev = true;
 
 log = function() {
-    if (dev) return console.log.apply(console, arguments);
+    var arg, index, _i, _len, _results;
+    if (dev) {
+        _results = [];
+        for (index = _i = 0, _len = arguments.length; _len > _i; index = ++_i) {
+            arg = arguments[index];
+            _results.push(Ti.API.info(index + 1 + ":", arg));
+        }
+        return _results;
+    }
 };
 
 $ = {
