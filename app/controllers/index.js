@@ -1,4 +1,4 @@
-var activateStation, dropMarker, focusStation, locate_bikes, myLocation, nearestStations, zoomToFit;
+var activateStation, drawPath, dropMarker, focusStation, initialize, locate_bikes, myLocation, nearestStations, zoomToFit;
 
 focusStation = function(event) {
   var station, _i, _len, _ref;
@@ -56,6 +56,17 @@ dropMarker = function(station) {
   return $.mapview.addAnnotation(station);
 };
 
+drawPath = function(station) {
+  var route, routePts;
+  routePts = {
+    points: [station, myLocation.coords],
+    color: "blue",
+    width: 4
+  };
+  route = Alloy.Globals.Map.createRoute(routePts);
+  return $.mapview.addRoute(route);
+};
+
 activateStation = function(station, index) {
   dropMarker(station);
   return zoomToFit($.mapview, [myLocation.coords, station]);
@@ -67,29 +78,39 @@ nearestStations = [];
 
 myLocation = null;
 
-Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+initialize = function() {
+  Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+  Ti.Geolocation.purpose = "Find the bikes nearest to you";
+  return Ti.Geolocation.getCurrentPosition(function(location) {
+    this.location = location;
+    myLocation = this.location;
+    Ti.API.info(JSON.stringify(this.location));
+    return locate_bikes.fetchBikesNear(this.location, (function(_this) {
+      return function(closestStations) {
+        var index, station, thisStation, _i, _len, _ref;
+        nearestStations = closestStations;
+        _ref = $.stations.children;
+        for (index = _i = 0, _len = _ref.length; _i < _len; index = _i += 2) {
+          station = _ref[index];
+          thisStation = nearestStations[index / 2];
+          station.children[0].text = thisStation.availableBikes;
+          station.children[1].text = thisStation.stationName;
+        }
+        return $.firstStation.fireEvent('click');
+      };
+    })(this));
+  });
+};
 
-Ti.Geolocation.purpose = "Find the bikes nearest to you";
-
-Ti.Geolocation.getCurrentPosition(function(location) {
-  this.location = location;
-  myLocation = this.location;
-  Ti.API.info(JSON.stringify(this.location));
-  return locate_bikes.fetchBikesNear(this.location, (function(_this) {
-    return function(closestStations) {
-      var index, station, thisStation, _i, _len, _ref;
-      nearestStations = closestStations;
-      _ref = $.stations.children;
-      for (index = _i = 0, _len = _ref.length; _i < _len; index = _i += 2) {
-        station = _ref[index];
-        thisStation = nearestStations[index / 2];
-        station.children[0].text = thisStation.availableBikes;
-        station.children[1].text = thisStation.stationName;
-      }
-      return $.firstStation.fireEvent('click');
-    };
-  })(this));
+Ti.App.addEventListener('resumed', function() {
+  return initialize();
 });
+
+setInterval(function() {
+  return initialize();
+}, 1000 * 60);
+
+initialize();
 
 $.index.open();
 

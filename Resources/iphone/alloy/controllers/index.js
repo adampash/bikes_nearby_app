@@ -305,7 +305,7 @@ function Controller() {
     $.__views.__alloyId19.add($.__views.__alloyId22);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var activateStation, dropMarker, focusStation, locate_bikes, myLocation, nearestStations, zoomToFit;
+    var activateStation, drawPath, dropMarker, focusStation, initialize, locate_bikes, myLocation, nearestStations, zoomToFit;
     focusStation = function() {
         var station, _i, _len, _ref;
         _ref = $.stations.children;
@@ -349,6 +349,16 @@ function Controller() {
         });
         return $.mapview.addAnnotation(station);
     };
+    drawPath = function(station) {
+        var route, routePts;
+        routePts = {
+            points: [ station, myLocation.coords ],
+            color: "blue",
+            width: 4
+        };
+        route = Alloy.Globals.Map.createRoute(routePts);
+        return $.mapview.addRoute(route);
+    };
     activateStation = function(station) {
         dropMarker(station);
         return zoomToFit($.mapview, [ myLocation.coords, station ]);
@@ -356,27 +366,33 @@ function Controller() {
     locate_bikes = require("locate_bikes").bikes;
     nearestStations = [];
     myLocation = null;
-    Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
-    Ti.Geolocation.purpose = "Find the bikes nearest to you";
-    Ti.Geolocation.getCurrentPosition(function(location) {
-        this.location = location;
-        myLocation = this.location;
-        Ti.API.info(JSON.stringify(this.location));
-        return locate_bikes.fetchBikesNear(this.location, function() {
-            return function(closestStations) {
-                var index, station, thisStation, _i, _len, _ref;
-                nearestStations = closestStations;
-                _ref = $.stations.children;
-                for (index = _i = 0, _len = _ref.length; _len > _i; index = _i += 2) {
-                    station = _ref[index];
-                    thisStation = nearestStations[index / 2];
-                    station.children[0].text = thisStation.availableBikes;
-                    station.children[1].text = thisStation.stationName;
-                }
-                return $.firstStation.fireEvent("click");
-            };
-        }(this));
+    initialize = function() {
+        Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+        Ti.Geolocation.purpose = "Find the bikes nearest to you";
+        return Ti.Geolocation.getCurrentPosition(function(location) {
+            this.location = location;
+            myLocation = this.location;
+            Ti.API.info(JSON.stringify(this.location));
+            return locate_bikes.fetchBikesNear(this.location, function() {
+                return function(closestStations) {
+                    var index, station, thisStation, _i, _len, _ref;
+                    nearestStations = closestStations;
+                    _ref = $.stations.children;
+                    for (index = _i = 0, _len = _ref.length; _len > _i; index = _i += 2) {
+                        station = _ref[index];
+                        thisStation = nearestStations[index / 2];
+                        station.children[0].text = thisStation.availableBikes;
+                        station.children[1].text = thisStation.stationName;
+                    }
+                    return $.firstStation.fireEvent("click");
+                };
+            }(this));
+        });
+    };
+    Ti.App.addEventListener("resumed", function() {
+        return initialize();
     });
+    initialize();
     $.index.open();
     __defers["$.__views.firstStation!click!focusStation"] && $.__views.firstStation.addEventListener("click", focusStation);
     __defers["$.__views.__alloyId4!click!focusStation"] && $.__views.__alloyId4.addEventListener("click", focusStation);

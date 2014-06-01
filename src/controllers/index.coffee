@@ -40,11 +40,19 @@ dropMarker = (station) ->
     myid:1
   $.mapview.addAnnotation(station)
 
+drawPath = (station) ->
+  routePts =
+    points:[station,myLocation.coords]
+    color:"blue"
+    width:4
+  route = Alloy.Globals.Map.createRoute(routePts)
+  $.mapview.addRoute(route)
+
 activateStation = (station, index) ->
   dropMarker(station)
   zoomToFit($.mapview, [myLocation.coords, station])
   # showInfoWindow(station)
-  # drawPath(index)
+  # drawPath(station)
   # $('.station').removeClass('active')
   # $('.station' + index).addClass('active')
 
@@ -53,18 +61,26 @@ locate_bikes = require('locate_bikes').bikes
 
 nearestStations = []
 myLocation = null
-Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST
-Ti.Geolocation.purpose = "Find the bikes nearest to you"
-Ti.Geolocation.getCurrentPosition (@location) ->
-  myLocation = @location
-  Ti.API.info JSON.stringify @location
-  locate_bikes.fetchBikesNear @location, (closestStations) =>
-    nearestStations = closestStations
-    for station, index in $.stations.children by 2
-      thisStation = nearestStations[index/2]
-      station.children[0].text = thisStation.availableBikes
-      station.children[1].text = thisStation.stationName
-    $.firstStation.fireEvent 'click'
+initialize = ->
+  Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST
+  Ti.Geolocation.purpose = "Find the bikes nearest to you"
+  Ti.Geolocation.getCurrentPosition (@location) ->
+    myLocation = @location
+    Ti.API.info JSON.stringify @location
+    locate_bikes.fetchBikesNear @location, (closestStations) =>
+      nearestStations = closestStations
+      for station, index in $.stations.children by 2
+        thisStation = nearestStations[index/2]
+        station.children[0].text = thisStation.availableBikes
+        station.children[1].text = thisStation.stationName
+      $.firstStation.fireEvent 'click'
 
+Ti.App.addEventListener 'resumed', ->
+  initialize()
+
+setInterval ->
+  initialize()
+, 1000 * 60
+
+initialize()
 $.index.open()
-
