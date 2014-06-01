@@ -377,6 +377,7 @@ function Controller() {
             return locate_bikes.fetchBikesNear(this.location, function() {
                 return function(closestStations) {
                     var index, station, thisStation, _i, _len, _ref;
+                    Ti.API.info("got CALLED BACK");
                     nearestStations = closestStations;
                     _ref = $.stations.children;
                     for (index = _i = 0, _len = _ref.length; _len > _i; index = _i += 2) {

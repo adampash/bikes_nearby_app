@@ -47,7 +47,6 @@
         };
       })(this));
       bikeJSON = this.bikeShares[0].url;
-      Ti.API.info(bikeJSON);
       return $.ajax({
         url: bikeJSON,
         dataType: 'json',
